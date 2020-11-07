@@ -22,6 +22,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm run test:point
-    - run: npm run test:shape
-    - run: npm run test:triangle
+    - run: npm run test
