@@ -27,26 +27,4 @@ export class Sword extends Weapon {
       ? this.baseDamage + this.damageModifier
       : MAX_PERCENTAGE;
   }
-
-  setDurabilityModifier(durabilityModifier) {
-    this.durabilityModifier = durabilityModifier;
-    this.effectiveDurability = this.baseDurability + this.durabilityModifier;
-  }
-
-  setDamageModifier(damageModifier) {
-    this.damageModifier = damageModifier;
-    this.effectiveDamage = this.baseDamage + this.damageModifier; 
-  }
-
-  use():string {
-    return '';
-  }
-
-  getDamage(): number {
-    return this.effectiveDamage;
-  }
-
-  getDurability(): number {
-    return this.effectiveDurability;
-  }
 }

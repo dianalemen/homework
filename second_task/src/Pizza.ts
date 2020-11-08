@@ -12,10 +12,6 @@ export class Pizza extends Consumable {
     this.spoiled = spoiled;
   }
 
-  use():string {
-    return this.eat();
-  }
-
   eat():string {
     if (this.slicesEaten < this.numberOfSlice && !this.spoiled) {
       this.slicesEaten++;

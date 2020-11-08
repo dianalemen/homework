@@ -20,32 +20,10 @@ export class Bow extends Weapon {
     this.weight = weight;
   }
 
-  setDurabilityModifier(durabilityModifier) {
-    this.durabilityModifier = Number(Number(durabilityModifier).toFixed(2));
-    this.effectiveDurability = this.baseDurability + this.durabilityModifier;
-  }
-
-  setDamageModifier(damageModifier) {
-    this.damageModifier = damageModifier;
-    this.effectiveDamage = this.effectiveDamage + this.damageModifier; 
-  }
-
   polish() {
     if (this.effectiveDurability < 1 ) {
       this.durabilityModifier = this.durabilityModifier + Weapon.MODIFIER_CHANGE_RATE;
       this.effectiveDurability = this.baseDurability + this.durabilityModifier;
     }
-  }
-
-  use():string {
-    return '';
-  }
-
-  getDamage(): number {
-    return this.effectiveDamage;
-  }
-
-  getDurability(): number {
-    return this.effectiveDurability;
   }
 }
