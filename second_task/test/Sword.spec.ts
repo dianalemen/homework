@@ -5,6 +5,7 @@ describe('Sword', () => {
 
     beforeEach(() => {
         sut = new Sword('sword', 1, 1, 1, 1);
+        sut.setDamageModifier(0.05);
     });
 
     describe('polish', () => {
