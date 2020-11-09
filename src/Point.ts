@@ -1,18 +1,16 @@
 export class Point {
   x: number;
   y: number;
-  point: string;
 
   constructor();
   constructor(x: number, y: number); 
-  constructor(x?, y?) {
-    this.x = x !== undefined ? x : 0;
-    this.y = y !== undefined ? y : 0;
-    this.point = `${this.x}, ${this.y}`;
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
   }
 
   toString(): string {
-    return `(${this.point})`
+    return `(${this.x}, ${this.y})`
   }
 
   distance();
@@ -25,9 +23,15 @@ export class Point {
       )
     }
 
-    const coordinates = x instanceof Point ? x.toString().replace(/\(/, '').replace(/\)/, '') : null;
-    const inputX = Number(y !== undefined ? x : coordinates.split(',')[0]);
-    const inputY = Number(y !== undefined? y : coordinates.split(',')[1]);
+    let inputX = x;
+    let inputY = y;
+
+    if (x instanceof Point) {
+      const coordinates = x.toString().replace(/\(/, '').replace(/\)/, '');
+      inputX = coordinates.split(',')[0];
+      inputY = coordinates.split(',')[1];
+    }
+
     const diffX = this.x - inputX;
     const diffY = this.y - inputY;
   

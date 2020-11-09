@@ -1,10 +1,7 @@
 import { Shape } from './Shape';
 import { Point } from "./Point";
 
-export class Triangle extends Shape {
-    protected color: string;
-    protected filled: boolean;
-  
+export class Triangle extends Shape {  
     constructor(fPoint: Point, sPoint: Point, tPoint: Point);
     constructor(fPoint: Point, sPoint: Point, tPoint: Point, color: string, filled: boolean);
     constructor(fPoint, sPoint, tPoint, color?, filled?) {

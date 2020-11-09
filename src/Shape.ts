@@ -7,15 +7,15 @@ export abstract class Shape {
 
   constructor(points: Point[]);
   constructor(points: Point[], color?: string, filled?: boolean);
-  constructor(points, color?, filled?) {
+  constructor(points, color = 'green', filled = true) {
 
     if (points.length < 3) {
       throw 'Please, provide more than 3 points'
     }
 
     this.points = points;
-    this.color = color || 'green';
-    this.filled = filled !== undefined ? filled : true;
+    this.color = color;
+    this.filled = filled;
   }
 
   toString(): string {
