@@ -3,8 +3,6 @@ import { Consumable } from './Consumable';
 export class Pizza extends Consumable {
   numberOfSlice: number;
   slicesEaten: number = 0;
-  spoiled: boolean;
-  name: string = 'pizza';
 
   constructor(numberOfSlice: number, spoiled: boolean) {
     super('pizza', 1, 1, spoiled)

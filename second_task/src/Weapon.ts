@@ -1,12 +1,10 @@
 import { Item } from './Item'
 
 export abstract class Weapon extends Item {
-  name: string;
   baseDamage: number;
   damageModifier: number;
   durabilityModifier: number;
   baseDurability: number;
-  value: number;
   weight: number;
   effectiveDamage: number;
   effectiveDurability: number;

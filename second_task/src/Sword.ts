@@ -2,16 +2,6 @@ import { Weapon } from './Weapon';
 
 const MAX_PERCENTAGE = 1.25;
 export class Sword extends Weapon {
-  name: string;
-  baseDamage: number;
-  damageModifier: number;
-  baseDurability: number;
-  value: number;
-  weight: number;
-  durabilityModifier: number;
-  effectiveDamage: number;
-  effectiveDurability: number;
-
   constructor(name: string, baseDamage: number, baseDurability: number, value: number, weight:number) {
     super(name, baseDamage, baseDurability, value, weight)
     this.name = name;

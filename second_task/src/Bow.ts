@@ -1,16 +1,6 @@
 import { Weapon } from './Weapon';
 
 export class Bow extends Weapon {
-  name: string = 'bow';
-  baseDamage: number;
-  damageModifier: number;
-  baseDurability: number;
-  value: number;
-  weight: number;
-  durabilityModifier: number;
-  effectiveDamage: number;
-  effectiveDurability: number;
-
   constructor(name:string, baseDamage: number, baseDurability: number, value: number, weight:number) {
     super(name, baseDamage, baseDurability, value, weight)
     this.name = name;
