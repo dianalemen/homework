@@ -5,9 +5,9 @@ export abstract class Shape {
   protected filled: boolean;
   points: Point[];
 
-  constructor(points);
-  constructor(points, color, filled);
-  constructor(points: Point[], color?: string, filled?: boolean) {
+  constructor(points: Point[]);
+  constructor(points: Point[], color?: string, filled?: boolean);
+  constructor(points, color?, filled?) {
 
     if (points.length < 3) {
       throw 'Please, provide more than 3 points'

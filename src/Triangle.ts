@@ -4,24 +4,17 @@ import { Point } from "./Point";
 export class Triangle extends Shape {
     protected color: string;
     protected filled: boolean;
-    fPoint: Point;
-    sPoint: Point;
-    tPoint: Point;
   
-    constructor(fPoint, sPoint, tPoint);
-    constructor(fPoint, sPoint, tPoint, color, filled);
-    constructor(fPoint: Point, sPoint: Point, tPoint: Point, color?: string, filled?: boolean) {
-      super([fPoint, sPoint, tPoint]);
-      this.fPoint = fPoint;
-      this.sPoint = sPoint;
-      this.tPoint = tPoint;
-      this.color = color || 'green';
-      this.filled = filled !== undefined ? filled : true;
+    constructor(fPoint: Point, sPoint: Point, tPoint: Point);
+    constructor(fPoint: Point, sPoint: Point, tPoint: Point, color: string, filled: boolean);
+    constructor(fPoint, sPoint, tPoint, color?, filled?) {
+      super([fPoint, sPoint, tPoint], color, filled);
     }
   
     toString(): string {
+      const [fPoint, sPoint, tPoint] = this.points;
       return (
-        `Triangle[v1=(${this.fPoint.x, this.fPoint.y}),v2=(${this.sPoint.x, this.sPoint.y}),v3=(${this.tPoint.x, this.tPoint.y})]`
+        `Triangle[v1=(${fPoint.x, fPoint.y}),v2=(${sPoint.x, sPoint.y}),v3=(${tPoint.x, tPoint.y})]`
       );
     }
   
