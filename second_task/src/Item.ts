@@ -17,7 +17,7 @@ export abstract class Item implements Comparable<Item> {
 		counter = counter++;
 	}
 
-	 compareTo(other: Item): number {
+	compareTo(other: Item): number {
 		const { value: currValue, name: currName } = this;
 		const { value: otherValue, name: otherName } = other;
 
