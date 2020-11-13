@@ -1,20 +1,20 @@
 import { Comparable } from './Comparable';
 
-let id = 0;
-let counter = 0;
-
 export abstract class Item implements Comparable<Item> {
 	name: string;
 	value: number;
 	weight: number;
 	id: number;
 
+	static id = 0;
+	static counter = 0;
+
 	constructor(name: string, value?: number, weight?: number) {
 		this.name = name;
 		this.value = value;
 		this.weight = weight;
-		this.id = id;
-		counter = counter++;
+		this.id = Item.id;
+		Item.counter = Item.counter++;
 	}
 
 	compareTo(other: Item): number {
@@ -48,11 +48,11 @@ export abstract class Item implements Comparable<Item> {
 	}
 
 	reset() {
-		counter = 0;
+		Item.counter = 0;
 	}
 
 	getId(): number {
-		return id;
+		return Item.id;
 	}
 
 	getName(): string {
@@ -80,6 +80,6 @@ export abstract class Item implements Comparable<Item> {
 	}
 
 	static get numberOfItems() {
-		return counter;
+		return Item.counter;
 	}
 }
