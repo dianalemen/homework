@@ -1,12 +1,11 @@
 import { ShipmentInterface, Shipment } from './Shipment';
-import { ID } from './mocks/mock_ids';
 
 export class MockGui {
   shipment: ShipmentInterface;
 
   constructor();
   constructor() {
-    const id = ID;
+    const id = 1;
     const toAdress = 'Lviv, Svobody str';
     const fromAdress = 'Kyiv, Bankova str';
     const toZipCode = '79000';
