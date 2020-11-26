@@ -25,18 +25,10 @@ export class Shipment implements ShipmentInterface {
     fromAdress: string,
     toZipCode: string,
     fromZipCode: string,
-    weight: number
-  )
-  constructor(
-    shipmentId: number,
-    toAddress: string,
-    fromAdress: string,
-    toZipCode: string,
-    fromZipCode: string,
     weight: number,
     marks: string[]
   )
-  constructor(shipmentId, toAddress, fromAdress, toZipCode, fromZipCode, weight, marks = []) {
+  constructor(shipmentId, toAddress, fromAdress, toZipCode, fromZipCode, weight, marks) {
     if (this.isZipCodeValid(toZipCode)) {
       throw 'Departure zip code has to contain 5 numbers'
     }
