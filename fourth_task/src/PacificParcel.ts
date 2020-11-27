@@ -1,28 +1,11 @@
 import { ShiperStrategy } from './ShiperStrategy';
 
-export class PacificParcel implements ShiperStrategy {
-  weight: number;
-  cost: number = 51;
-  shipmentType: string;
-
+export class PacificParcel extends ShiperStrategy {
   constructor(weight, type) {
-    this.weight = weight;
-    this.shipmentType = type;
-  }
-
-  getRate(): number {
-    switch(this.shipmentType) {
-      case 'oversized':
-        return 2;
-      case 'package':
-        return 19;
-      case 'letter':
-      default:
-        return 51;
-    }
+    super(weight, type, 2, 19, 51)
   }
 
   getCost(): number {
-    return this.weight * this.getRate();
+    return super.getCost();
   }
 }
