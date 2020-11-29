@@ -4,7 +4,6 @@ import { MockGui } from './MockGui';
 export class Client {
   shipment: ShipmentInterface;
 
-  constructor();
   constructor() {
     this.shipment = new MockGui().shipment;
     this.onShip(this.shipment);
