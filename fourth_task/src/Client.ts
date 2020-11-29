@@ -15,6 +15,6 @@ export class Client {
 
   onShip(shipment: ShipmentInterface): string {
     const { shipmentId, fromAdress, fromZipCode, toZipCode, toAddress } = shipment;
-    return `${shipmentId}, from ${fromAdress} ${fromZipCode}, to ${toAddress} ${toZipCode}, OK ${this.strategyManager.getCost()}`;
+    return `${shipmentId}, from ${fromAdress} ${fromZipCode}, to ${toAddress} ${toZipCode}, Cost ${this.strategyManager.getCost()}`;
   }
 }
