@@ -2,6 +2,25 @@ import { Letter } from './Letter';
 import { Package } from './Package';
 import { Oversized } from './Oversized';
 
+function format(_, $, propertyDesciptor: PropertyDescriptor): any {
+  propertyDesciptor.value = function (...args: any[]) {
+
+      return this.marks.reduce((acc, value) => {
+
+        if (value === 'Do Not Leave') {
+          value = `${value} if address not at home`;
+        }
+  
+        if (acc) {
+          return `${acc}\n **MARK ${value.toUpperCase()} **`
+        }
+  
+        return `**MARK ${value.toUpperCase()} **`
+      }, '')
+  }
+  return propertyDesciptor;
+};
+
 export interface ShipmentInterface {
   shipmentId: number,
   toAddress: string,
@@ -9,7 +28,8 @@ export interface ShipmentInterface {
   toZipCode: string,
   fromZipCode: string,
   weight: number,
-  marks?: string[] 
+  marks?: string[],
+  marksMessages?: string | null
 }
 
 export class Shipment implements ShipmentInterface {
@@ -20,6 +40,7 @@ export class Shipment implements ShipmentInterface {
   fromZipCode: string;
   weight: number;
   marks?: string[];
+  marksMessages?: string | null;
 
   constructor(shipment) {
     if (this.isZipCodeValid(shipment.toZipCode)) {
@@ -44,7 +65,8 @@ export class Shipment implements ShipmentInterface {
     this.fromAdress = fromAdress;
     this.toZipCode = toZipCode;
     this.weight = weight;
-    this.marks = marks || [];
+    this.marks = marks;
+    this.marksMessages = this.getMarksMessages();
   }
 
   isZipCodeValid(zipCode) {
@@ -63,5 +85,10 @@ export class Shipment implements ShipmentInterface {
       default:
         return new Shipment(shipment);
     }
+  }
+
+  @format
+  getMarksMessages(): string | null {
+    if (!this.marks.length) return null;
   }
 }
