@@ -1,4 +1,3 @@
-import { ID } from './mocks/mock_ids';
 import { Letter } from './Letter';
 import { Package } from './Package';
 import { Oversized } from './Oversized';
@@ -13,67 +12,35 @@ export interface ShipmentInterface {
   marks?: string[] 
 }
 
-export class Shipment implements ShipmentInterface {
-  shipmentId: number;
-  toAddress: string;
-  fromAdress: string;
-  toZipCode: string;
-  fromZipCode: string;
-  weight: number;
-  marks?: string[];
+export class Shipment {
 
-  constructor(
-    shipmentId: number,
-    toAddress: string,
-    fromAdress: string,
-    toZipCode: string,
-    fromZipCode: string,
-    weight: number
-  )
-
-  constructor(
-    shipmentId: number,
-    toAddress: string,
-    fromAdress: string,
-    toZipCode: string,
-    fromZipCode: string,
-    weight: number,
-    marks: string[]
-  )
-  
-  constructor(shipmentId, toAddress, fromAdress, toZipCode, fromZipCode, weight) {
-    if (this.isZipCodeValid(toZipCode)) {
+  constructor(shipment) {
+    if (this.isZipCodeValid(shipment.toZipCode)) {
       throw 'Departure zip code has to contain 5 numbers'
     }
 
-    if (this.isZipCodeValid(fromZipCode)) {
+    if (this.isZipCodeValid(shipment.fromZipCode)) {
       throw 'Destination zip code has to contain 5 numbers'
     }
 
-    const shipment = this.getShipmentObject(shipmentId, toAddress, fromAdress, toZipCode, fromZipCode, weight);
-    this.shipmentId = shipment.shipmentId || ID;
-    this.toAddress = shipment.toAddress;
-    this.fromAdress = shipment.fromAdress;
-    this.toZipCode = shipment.toZipCode;
-    this.fromZipCode = shipment.fromZipCode;
-    this.weight = shipment.weight;
-    this.marks = shipment.marks || [];
+    this.getShipmentObject(shipment);
   }
 
   isZipCodeValid(zipCode) {
     return zipCode.toString().length < 5 || zipCode.toString().length > 5
   }
 
-  getShipmentObject(id, toAddress, fromAdress, toZipCode, fromZipCode, weight) {
+  getShipmentObject(shipment) {
+    const { weight } = shipment;
     switch(true) {
       case weight <= 15:
-        return new Letter(id, toAddress, fromAdress, toZipCode, fromZipCode, weight);
+        return new Letter(shipment);
       case weight > 15 && weight <= 160:
-        return new Package(id, toAddress, fromAdress, toZipCode, fromZipCode, weight);
+        return new Package(shipment);
       case weight > 160:
-        return new Oversized(id, toAddress, fromAdress, toZipCode, fromZipCode, weight);
+        return new Oversized(shipment);
       default:
-        return new Shipment(id, toAddress, fromAdress, toZipCode, fromZipCode, weight);
+        return new Shipment(shipment);
     }
   }
 }

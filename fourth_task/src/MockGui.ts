@@ -1,17 +1,17 @@
 import { ShipmentInterface, Shipment } from './Shipment';
 
+const mockedShipment: ShipmentInterface = {
+  shipmentId: 1,
+  toAddress: 'Lviv, Svobody str',
+  fromAdress: 'Kyiv, Bankova str',
+  toZipCode: '79000',
+  fromZipCode: '01001',
+  weight: 10
+}
 export class MockGui {
   shipment: ShipmentInterface;
 
-  constructor();
-  constructor() {
-    const id = 1;
-    const toAdress = 'Lviv, Svobody str';
-    const fromAdress = 'Kyiv, Bankova str';
-    const toZipCode = '79000';
-    const fromZipCode = '01001';
-    const weight = 10;
-
-    this.shipment = new Shipment(id, toAdress, fromAdress, toZipCode, fromZipCode, weight);
+  constructor(shipment: ShipmentInterface = mockedShipment) {
+    this.shipment = new Shipment(shipment);
   }
 }
