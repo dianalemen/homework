@@ -11,11 +11,9 @@ function format(_, $, propertyDesciptor: PropertyDescriptor): any {
           value = `${value} if address not at home`;
         }
   
-        if (acc) {
-          return `${acc}\n **MARK ${value.toUpperCase()} **`
-        }
+        const message = `**MARK ${value.toUpperCase()} **`;
   
-        return `**MARK ${value.toUpperCase()} **`
+        return acc ? `${acc}\n ${message}` : message;
       }, '')
   }
   return propertyDesciptor;
