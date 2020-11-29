@@ -11,6 +11,6 @@ export class Client {
 
   onShip(shipment: ShipmentInterface): string {
     const { shipmentId, fromAdress, fromZipCode, toZipCode, toAddress, weight } = shipment;
-    return `${shipmentId}, from ${fromAdress} ${fromZipCode}, to ${toAddress} ${toZipCode}, OK ${weight * 39}`;
+    return `${shipmentId}, from ${fromAdress} ${fromZipCode}, to ${toAddress} ${toZipCode}, Cost ${weight * 39}`;
   }
 }
