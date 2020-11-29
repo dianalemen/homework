@@ -1,6 +1,6 @@
 import { ShiperStrategy } from './ShiperStrategy';
 
-export class AirEast  implements ShiperStrategy  {
+export class AirEast implements ShiperStrategy  {
   weight: number;
   cost: number = 39;
 
