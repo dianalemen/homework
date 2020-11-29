@@ -12,7 +12,14 @@ export interface ShipmentInterface {
   marks?: string[] 
 }
 
-export class Shipment {
+export class Shipment implements ShipmentInterface {
+  shipmentId: number;
+  toAddress: string;
+  fromAdress: string;
+  toZipCode: string;
+  fromZipCode: string;
+  weight: number;
+  marks?: string[];
 
   constructor(shipment) {
     if (this.isZipCodeValid(shipment.toZipCode)) {
@@ -23,7 +30,21 @@ export class Shipment {
       throw 'Destination zip code has to contain 5 numbers'
     }
 
-    this.getShipmentObject(shipment);
+    const {
+      shipmentId,
+      toAddress,
+      fromAdress,
+      toZipCode,
+      weight,
+      marks
+    } = this.getShipmentObject(shipment);
+
+    this.shipmentId = shipmentId;
+    this.toAddress = toAddress;
+    this.fromAdress = fromAdress;
+    this.toZipCode = toZipCode;
+    this.weight = weight;
+    this.marks = marks || [];
   }
 
   isZipCodeValid(zipCode) {
