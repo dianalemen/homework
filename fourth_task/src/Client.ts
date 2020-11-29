@@ -6,7 +6,6 @@ export class Client {
   shipment: ShipmentInterface;
   strategyManager;
 
-  constructor();
   constructor() {
     this.shipment = new MockGui().shipment;
     this.strategyManager = new StrategyManager();
