@@ -6,7 +6,6 @@ export class ShiperStrategy {
   letterRate: number;
   shipmentType: string;
 
-  constructor(weight:number, shipmentType: string, oversizedRate: number, packageRate: number, letterRate: number);
   constructor(weight: number, shipmentType, oversizedRate, packageRate, letterRate) {
     this.weight = weight;
     this.shipmentType = shipmentType;
