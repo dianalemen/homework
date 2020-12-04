@@ -1,3 +1,4 @@
+import { ID } from './mocks/mock_ids';
 import { Letter } from './Letter';
 import { Package } from './Package';
 import { Oversized } from './Oversized';
@@ -39,7 +40,7 @@ export class Shipment implements ShipmentInterface {
       marks
     } = this.getShipmentObject(shipment);
 
-    this.shipmentId = shipmentId;
+    this.shipmentId = shipmentId || this.getShipmentID();
     this.toAddress = toAddress;
     this.fromAdress = fromAdress;
     this.toZipCode = toZipCode;
@@ -63,5 +64,9 @@ export class Shipment implements ShipmentInterface {
       default:
         return new Shipment(shipment);
     }
+  }
+
+  getShipmentID() {
+    return ID;
   }
 }
