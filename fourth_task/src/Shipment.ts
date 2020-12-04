@@ -28,7 +28,7 @@ export class Shipment implements ShipmentInterface {
       throw 'Destination zip code has to contain 5 numbers'
     }
 
-    this.shipmentId = shipmentId || ID;
+    this.shipmentId = shipmentId || this.getShipmentID();
     this.toAddress = toAddress;
     this.fromAdress = fromAdress;
     this.toZipCode = toZipCode;
@@ -39,5 +39,9 @@ export class Shipment implements ShipmentInterface {
 
   isZipCodeValid(zipCode) {
     return zipCode.toString().length < 5 || zipCode.toString().length > 5
+  }
+
+  getShipmentID() {
+    return ID;
   }
 }
