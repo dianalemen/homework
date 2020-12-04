@@ -1,12 +1,16 @@
-import { ShipmentInterface } from './Shipment';
+import { Shipment, ShipmentInterface } from './Shipment';
 import { MockGui } from './MockGui';
+import { GuiInterface } from './Gui';
+
+const event = 'shipItself';
 
 export class Client {
-  shipment: ShipmentInterface;
+  gui: GuiInterface;
 
-  constructor() {
-    this.shipment = new MockGui().shipment;
-    this.onShip(this.shipment);
+  constructor(gui: GuiInterface = new MockGui()) {
+    this.gui = gui;
+    this.gui.on(event, this.onShip);
+    this.gui.trigger(event, this.gui.state);
   }
 
   onShip(shipment: ShipmentInterface): string {
