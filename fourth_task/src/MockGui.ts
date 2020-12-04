@@ -1,4 +1,5 @@
-import { ShipmentInterface, Shipment } from './Shipment';
+import { GuiInterface } from './Gui';
+import { ShipmentInterface } from './Shipment';
 
 const mockedMarks: string[] = ['Fragile', 'Do Not Leave', 'Return Receipt Requested'];
 const mockedShipment: ShipmentInterface = {
@@ -11,11 +12,19 @@ const mockedShipment: ShipmentInterface = {
   marks: mockedMarks
 }
 
+export class MockGui implements GuiInterface {
+  listener;
+  state: ShipmentInterface;
 
-export class MockGui {
-  shipment: ShipmentInterface;
+  constructor() {
+    this.state = mockedShipment;
+  }
 
-  constructor(shipment: ShipmentInterface = mockedShipment) {
-    this.shipment = new Shipment(shipment);
+  on(eventType, callback) {
+    this.listener = {[eventType]: callback }
+  }
+
+  trigger(eventType, state) {
+    this.listener[eventType](state)
   }
 }
