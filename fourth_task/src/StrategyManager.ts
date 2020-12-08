@@ -9,9 +9,9 @@ export class StrategyManager {
     this._strategy = null;
   }
 
-  setStrategy({ fromZipCode, weight, type }): void {
+  setStrategy({ fromAdress, weight, type }): void {
     let strategy;
-    switch(fromZipCode.toString().charAt(0)) {
+    switch(fromAdress.toString().charAt(0)) {
       case '4':
       case '5':
       case '6':

@@ -3,23 +3,6 @@ import { Letter } from './Letter';
 import { Package } from './Package';
 import { Oversized } from './Oversized';
 
-function format(_, $, propertyDesciptor: PropertyDescriptor): any {
-  propertyDesciptor.value = function (...args: any[]) {
-
-      return this.marks.reduce((acc, value) => {
-
-        if (value === 'Do Not Leave') {
-          value = `${value} if address not at home`;
-        }
-  
-        const message = `**MARK ${value.toUpperCase()} **`;
-  
-        return acc ? `${acc}\n ${message}` : message;
-      }, '')
-  }
-  return propertyDesciptor;
-};
-
 export interface ShipmentInterface {
   shipmentId: number,
   toAddress: string,
@@ -27,8 +10,7 @@ export interface ShipmentInterface {
   toZipCode: string,
   fromZipCode: string,
   weight: number,
-  marks?: string[],
-  marksMessages?: string | null
+  marks?: string[]
 }
 
 export class Shipment implements ShipmentInterface {
@@ -39,7 +21,6 @@ export class Shipment implements ShipmentInterface {
   fromZipCode: string;
   weight: number;
   marks?: string[];
-  marksMessages?: string | null;
 
   constructor(shipment) {
     if (this.isZipCodeValid(shipment.toZipCode)) {
@@ -55,6 +36,7 @@ export class Shipment implements ShipmentInterface {
       toAddress,
       fromAdress,
       toZipCode,
+      fromZipCode,
       weight,
       marks
     } = this.getShipmentObject(shipment);
@@ -63,13 +45,23 @@ export class Shipment implements ShipmentInterface {
     this.toAddress = toAddress;
     this.fromAdress = fromAdress;
     this.toZipCode = toZipCode;
+    this.fromZipCode = fromZipCode;
     this.weight = weight;
     this.marks = marks;
-    this.marksMessages = this.getMarksMessages();
   }
 
   isZipCodeValid(zipCode) {
     return zipCode.toString().length < 5 || zipCode.toString().length > 5
+  }
+
+  ship(cost): string {
+    const { shipmentId, fromAdress, fromZipCode, toZipCode, toAddress  } = this;
+    const message = `${shipmentId},
+      from ${fromAdress} ${fromZipCode},
+      to ${toAddress} ${toZipCode},
+      Cost ${cost}`;
+
+      return message;
   }
 
   getShipmentObject(shipment) {
@@ -84,11 +76,6 @@ export class Shipment implements ShipmentInterface {
       default:
         return new Shipment(shipment);
     }
-  }
-
-  @format
-  getMarksMessages(): string | null {
-    if (!this.marks.length) return null;
   }
   
   getShipmentID() {
