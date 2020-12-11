@@ -1,25 +1,15 @@
+import { AbstarctShipment } from './AbstarctShipment';
+
 interface ShipmentDecoratorInterface {
   ship: (val) => string
 }
 
-export class ShipmentDecorator implements ShipmentDecoratorInterface {
+export class ShipmentDecorator extends AbstarctShipment implements ShipmentDecoratorInterface {
   shipment;
-  shipmentId: number;
-  toAddress: string;
-  fromAdress: string;
-  toZipCode: string;
-  fromZipCode: string;
-  weight: number;
-  marks?: string[];
 
   constructor(shipment) {
+    super(shipment)
     this.shipment = shipment;
-    this.shipmentId = this.shipment.shipmentId;
-    this.toAddress = this.shipment.toAddress;
-    this.fromAdress = this.shipment.fromAdress;
-    this.toZipCode = this.shipment.toZipCode;
-    this.weight = this.shipment.weight;
-    this.marks = this.shipment.marks;
   }
 
   ship(cost): string {
@@ -34,6 +24,8 @@ export class ShipmentDecorator implements ShipmentDecoratorInterface {
       return acc ? `${acc}\n ${message}` : message;
     }, '')
 
+    // for the testing purpose
+    console.log(`${this.shipment.ship(cost)}\n ${markedMessages}`);
     return `${this.shipment.ship(cost)}\n ${markedMessages}`;
   }
 }

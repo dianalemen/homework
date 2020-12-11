@@ -1,23 +1,8 @@
-import { ShipmentInterface } from './Shipment';
+import { AbstarctShipment } from './AbstarctShipment';
 
-export class Letter implements ShipmentInterface {
-  shipmentId: number;
-  toAddress: string;
-  fromAdress: string;
-  toZipCode: string;
-  fromZipCode: string;
-  weight: number;
-  type: string;
-  marks?: string[];
-
+export class Letter extends AbstarctShipment {
   constructor(shipment) {
-    this.shipmentId = shipment.shipmentId;
-    this.toAddress = shipment.toAddress;
-    this.fromAdress = shipment.fromAdress;
-    this.fromZipCode = shipment.fromZipCode;
-    this.toZipCode = shipment.toZipCode;
-    this.weight = shipment.weight;
-    this.marks = shipment.marks;
+    super(shipment);
     this.type = 'letter'
   }
 }
