@@ -1,7 +1,8 @@
-import { Shipment } from './Shipment';
+import { AbstarctShipment } from './AbstarctShipment';
 
-export class Package extends Shipment {
+export class Package extends AbstarctShipment {
   constructor(shipment) {
-    super({ ...shipment, type: 'package' });
+    super(shipment);
+    this.type = 'package';
   }
 }

@@ -10,7 +10,7 @@ export interface ShipmentInterface {
   toZipCode: string,
   fromZipCode: string,
   weight: number,
-  marks?: string[] 
+  marks?: string[]
 }
 
 export class Shipment implements ShipmentInterface {
@@ -36,6 +36,7 @@ export class Shipment implements ShipmentInterface {
       toAddress,
       fromAdress,
       toZipCode,
+      fromZipCode,
       weight,
       marks
     } = this.getShipmentObject(shipment);
@@ -44,12 +45,23 @@ export class Shipment implements ShipmentInterface {
     this.toAddress = toAddress;
     this.fromAdress = fromAdress;
     this.toZipCode = toZipCode;
+    this.fromZipCode = fromZipCode;
     this.weight = weight;
-    this.marks = marks || [];
+    this.marks = marks;
   }
 
   isZipCodeValid(zipCode) {
     return zipCode.toString().length < 5 || zipCode.toString().length > 5
+  }
+
+  ship(cost): string {
+    const { shipmentId, fromAdress, fromZipCode, toZipCode, toAddress  } = this;
+    const message = `${shipmentId},
+      from ${fromAdress} ${fromZipCode},
+      to ${toAddress} ${toZipCode},
+      Cost ${cost}`;
+
+      return message;
   }
 
   getShipmentObject(shipment) {
@@ -65,7 +77,7 @@ export class Shipment implements ShipmentInterface {
         return new Shipment(shipment);
     }
   }
-
+  
   getShipmentID() {
     return ID;
   }
