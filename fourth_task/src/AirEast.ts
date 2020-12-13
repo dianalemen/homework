@@ -1,14 +1,11 @@
 import { ShiperStrategy } from './ShiperStrategy';
 
-export class AirEast implements ShiperStrategy  {
-  weight: number;
-  cost: number = 39;
-
-  constructor(weight) {
-    this.weight = weight;
+export class AirEast extends ShiperStrategy  {
+  constructor(weight, type) {
+    super(weight, type, 35, 25, 39)
   }
 
   getCost(): number {
-    return this.weight * this.cost;
+    return super.getCost();
   }
 }
