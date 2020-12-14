@@ -1,19 +1,11 @@
 const minPrioryty = 10;
 const maxPriority = 0;
 
-const priorityQ = [
-  { name: 'Priority 1', priority: 1, run: function () { console.log(this.name) } },
-  { name: 'Priority 5', priority: 5, run: function () { console.log(this.name) } },
-  { name: 'Priority 7', priority: 7, run: function () { console.log(this.name) } },
-  { name: 'Priority 3', priority: 3, run: function () { console.log(this.name) } },
-  { name: 'Priority 9', priority: 9, run: function () { console.log(this.name) } },
-  { name: 'Priority 0', priority: 0, run: function () { console.log(this.name) } },
-  { name: 'Priority 2', priority: 2, run: function () { console.log(this.name) } },
-  { name: 'Priority 6', priority: 6, run: function () { console.log(this.name) } },
-  { name: 'Priority 4', priority: 4, run: function () { console.log(this.name) } },
-  { name: 'Priority 8', priority: 8, run: function () { console.log(this.name) } },
-  { name: 'Priority 10', priority: 10, run: function () { console.log(this.name) } }
-];
+const priorityQ = [];
+
+const insert = task => {
+  priorityQ.push(task);
+}
 
 const quiqSortByPriority = array => {
   if (array.length < 2) return array;
@@ -32,12 +24,28 @@ const quiqSortByPriority = array => {
 }
 
 // for the testing purpose; has to be infinity loop
+let taskRunnerIteration = 0;
 const taskRuner = array => {
   if (!array.length) return;
   const sortedQByPriority = quiqSortByPriority(array);
-  sortedQByPriority[0].run();
+
+  console.log('on the', taskRunnerIteration, 'Q length -->', sortedQByPriority.length);
+  taskRunnerIteration++;
+  sortedQByPriority[0].item.run();
   sortedQByPriority.shift();
   return taskRuner(sortedQByPriority);
 }
+
+insert({ priority: 1, item: { run: function () { console.log(this.name) }, name: 'Priority 1' }});
+insert({ priority: 5, item: { run: function () { console.log(this.name) }, name: 'Priority 5' }});
+insert({ priority: 7, item: { run: function () { console.log(this.name) }, name: 'Priority 7' }});
+insert({ priority: 3, item: { run: function () { console.log(this.name) }, name: 'Priority 3' }});
+insert({ priority: 9, item: { run: function () { console.log(this.name) }, name: 'Priority 9' }});
+insert({ priority: 0, item: { run: function () { console.log(this.name) }, name: 'Priority 0' }});
+insert({ priority: 2, item: { run: function () { console.log(this.name) }, name: 'Priority 2' }});
+insert({ priority: 6, item: { run: function () { console.log(this.name) }, name: 'Priority 6' }});
+insert({ priority: 4, item: { run: function () { console.log(this.name) }, name: 'Priority 4' }});
+insert({ priority: 8, item: { run: function () { console.log(this.name) }, name: 'Priority 8' }});
+insert({ priority: 10, item : { run: function () { console.log(this.name) }, name: 'Priority 10' }});
 
 taskRuner(priorityQ);
