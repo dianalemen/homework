@@ -1,6 +1,3 @@
-const minPrioryty = 10;
-const maxPriority = 0;
-
 const priorityQ = [];
 
 const insert = task => {
