@@ -12,7 +12,7 @@ class Graph {
 
   addEdge(start, end) {
     for(let i = 0; i < end; i++) {
-      this.vertices[start][i] = this.vertices[start][i] || Number.MAX_SAFE_INTEGER;
+      this.vertices[start][i] = this.vertices[start][i] || 0;
     }
     this.vertices[start][end] = 1;
   }
@@ -29,7 +29,7 @@ class Graph {
     for (let index = 0; index < this.vertices.length; index++) {
       if (this.vertices[index].length < maxEdgesLength) {
         const diff = maxEdgesLength - this.vertices[index].length;
-        this.vertices[index] = this.vertices[index].concat(Array(diff).fill(Number.MAX_SAFE_INTEGER));
+        this.vertices[index] = this.vertices[index].concat(Array(diff).fill(0));
       }
 
       this.matrix[index] = this.vertices[index];
@@ -57,6 +57,7 @@ graph.addEdge(3, 4);
 graph.addEdge(4, 5);
 
 graph.buildMatrix();
+console.log(graph.getMatrix());
 
 const culcShortestDistance = (graph, startVertex, endVertex) => {
   const lengthOfVertices = graph.getMatrixLength();
@@ -66,7 +67,7 @@ const culcShortestDistance = (graph, startVertex, endVertex) => {
   const prevVertices = new Array(lengthOfVertices);
 
   for (let i = 0; i < lengthOfVertices; i++) {
-    pathLengths[i] = graph.getMatrix()[startVertex][i];
+    pathLengths[i] = graph.getMatrix()[startVertex][i] || Number.MAX_SAFE_INTEGER;
     if (pathLengths[i] !== Number.MAX_SAFE_INTEGER) {
       prevVertices[i] = startVertex;
     }
@@ -90,7 +91,6 @@ const culcShortestDistance = (graph, startVertex, endVertex) => {
         var possiblyCloserDistance = pathLengths[closestVertex] + graph.getMatrix()[startVertex][closestVertex];
         if (possiblyCloserDistance < pathLengths[j]) {
           pathLengths[j] = possiblyCloserDistance;
-          console.log(j, closestVertex)
           prevVertices[j] = closestVertex;
         }
       }
@@ -102,6 +102,8 @@ const culcShortestDistance = (graph, startVertex, endVertex) => {
     path.unshift(endVertex);
     endVertex = prevVertices[endVertex];
   }
+
+  console.log(path);
 }
 
 culcShortestDistance(graph, 1, 4);
