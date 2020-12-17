@@ -1,26 +1,27 @@
+interface ItemInterface {
+  run: () => void;
+  name: string;
+}
+
+interface TaskInterface {
+  priority: number;
+  item: ItemInterface;
+}
+
 class PriorityQueue {
-  quiqSortByPriority(array) {
-    if (array.length < 2) return array;
-    let pivot = array[0];
-    const left = [];
-    const right = [];
-  
-    for (let i = 1; i < array.length; i++) {
-      if (pivot.priority > array[i].priority) {
-        left.push(array[i]);
-      } else {
-        right.push(array[i]);
-      }
-    }
-    return this.quiqSortByPriority(left).concat(pivot, this.quiqSortByPriority(right));
-  }
+  taskQ = [];
 
   insert(priority, item) {
-    this.taskQ = this.quiqSortByPriority([...this.taskQ || [], { item, priority }]);
+    const closesSmallerIndex = this.taskQ.findIndex(item => item.priority >= priority)
+    if (closesSmallerIndex === -1) {
+         return this.taskQ = [...this.taskQ, item]
+    }
+    this.taskQ = [...this.taskQ.slice(0, closesSmallerIndex), item, ...this.taskQ.slice(closesSmallerIndex)]
   }
 
   getHighestPriority() {
-    return this.taskQ[0].item;
+    console.log(this.taskQ[0])
+    return this.taskQ[0];
   }
 
   deleteHighestPriority() {
