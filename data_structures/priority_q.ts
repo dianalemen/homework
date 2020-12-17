@@ -1,33 +1,36 @@
-let priorityQ = [];
+const priorityQ = [];
 
-interface ItemInterface {
-  run: () => void;
-  name: string;
+const insert = task => {
+  priorityQ.push(task);
 }
 
-interface TaskInterface {
-  priority: number;
-  item: ItemInterface;
-}
+const quiqSortByPriority = array => {
+  if (array.length < 2) return array;
+  let pivot = array[0];
+  const left = [];
+  const right = [];
 
-const insert = (task: TaskInterface) => {
-  const closesSmallerIndex = priorityQ.findIndex(item => item. priority >= task.priority)
-  if (closesSmallerIndex === -1) {
-       return priorityQ = [...priorityQ, task]
+  for (let i = 1; i < array.length; i++) {
+    if (pivot.priority > array[i].priority) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i]);
+    }
   }
-  priorityQ = [...priorityQ.slice(0, closesSmallerIndex), task, ...priorityQ.slice(closesSmallerIndex)]
+  return quiqSortByPriority(left).concat(pivot, quiqSortByPriority(right));
 }
 
 // for the testing purpose; has to be infinity loop
-let taskRunnerIteration: number = 0;
-const taskRuner = (array: TaskInterface[]) => {
+let taskRunnerIteration = 0;
+const taskRuner = array => {
   if (!array.length) return;
+  const sortedQByPriority = quiqSortByPriority(array);
 
-  console.log('on the', taskRunnerIteration, 'Q length -->', priorityQ.length);
+  console.log('on the', taskRunnerIteration, 'Q length -->', sortedQByPriority.length);
   taskRunnerIteration++;
-  priorityQ[0].item.run();
-  priorityQ.shift();
-  return taskRuner(priorityQ);
+  sortedQByPriority[0].item.run();
+  sortedQByPriority.shift();
+  return taskRuner(sortedQByPriority);
 }
 
 insert({ priority: 1, item: { run: function () { console.log(this.name) }, name: 'Priority 1' }});
