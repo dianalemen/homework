@@ -1,4 +1,7 @@
 class Graph {
+  vertices: number[][];
+  matrix: number[][];
+
   constructor(amountOfVertices) {
     this.vertices = [];
     this.addVertices(amountOfVertices);
@@ -86,9 +89,9 @@ const culcShortestDistance = (graph, startVertex, endVertex) => {
     }
     visited[closestVertex] = true;
 
-    for (var j = 0; j < lengthOfVertices; j++) {
+    for (let j = 0; j < lengthOfVertices; j++) {
       if (!visited[j]) {
-        var possiblyCloserDistance = pathLengths[closestVertex] + graph.getMatrix()[startVertex][closestVertex];
+        const possiblyCloserDistance = pathLengths[closestVertex] + graph.getMatrix()[startVertex][closestVertex];
         if (possiblyCloserDistance < pathLengths[j]) {
           pathLengths[j] = possiblyCloserDistance;
           prevVertices[j] = closestVertex;
